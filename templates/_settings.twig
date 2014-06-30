@@ -1,0 +1,39 @@
+{% import '_includes/forms' as forms %}
+
+<h2>Connection Details</h2>
+
+{{ forms.textField({
+    label:      'Host'|t,
+    name:       'host',
+    value:      settings.host,
+    disabled:   (config.host)
+}) }}
+
+{{ forms.textField({
+    label:      'Port'|t,
+    name:       'port',
+    value:      settings.port,
+    disabled:   (config.port)
+}) }}
+
+{{ forms.textField({
+    label:      'Username'|t,
+    name:       'username',
+    value:      settings.username,
+    disabled:   (config.username)
+}) }}
+
+{{ forms.passwordField({
+    label:      'Password'|t,
+    name:       'password',
+    value:      settings.password,
+    disabled:   (config.password)
+}) }}
+
+{{ forms.textField({
+    label:      'Database'|t,
+    name:       'database',
+    value:      settings.database,
+    disabled:   (config.database)
+}) }}
+

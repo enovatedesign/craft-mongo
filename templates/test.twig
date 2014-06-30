@@ -1,0 +1,35 @@
+{% extends "_layouts/cp" %}
+
+{% set centered = true %}
+{% set title = "Mongo" %}
+
+{% block content %}
+
+    {# {% do craft.mongo.collection('test_records').drop %} #}
+
+    {% set recordCount = craft.mongo.collection('test_records').count %}
+
+    {% do craft.mongo.collection('test_records').insert({
+        name: 'Test Record ' ~ (recordCount + 1),
+        timestamp: craft.mongo.date
+    }) %}
+
+    <table class="data fullwidth">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Timestamp</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for record in craft.mongo.collection('test_records').find.sort({name: 1}) %}
+                <tr>
+                    <td>{{ record._id }} <small>({{ record._id.hostname }})</small></td>
+                    <td>{{ record.name }}</td>
+                    <td>{{ record.timestamp.sec|date }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
